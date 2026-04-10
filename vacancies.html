@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вакансии — Типография ПрессРост</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        /* === БАЗОВЫЕ ПЕРЕМЕННЫЕ И СТИЛИ === */
+        :root {
+            --press-green: #2d8a4e;
+            --dark-green: #1e5c34;
+            --light-green: #f0f7f3;
+            --text-dark: #121212;
+            --text-muted: #666666;
+            --bg-light: #f8faf9;
+            --white: #ffffff;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            background-image: url('bg-pattern.webp'); 
+            background-repeat: repeat; 
+            background-attachment: fixed; 
+            line-height: 1.6;
+            font-size: 18px;
+            padding-top: 40px;
+        }
+
+        h1, h2, h3, h4 { font-family: 'Inter', sans-serif; font-weight: 800; letter-spacing: -0.5px; }
+
+        /* === ШАПКА И МЕНЮ ИЗ INDEX.HTML === */
+        .top-bar { background-color: var(--press-green); color: white; padding: 10px 8%; display: flex; justify-content: space-between; font-size: 14px; font-weight: 600; position: fixed; top: 0; left: 0; width: 100%; z-index: 1001; }
+        .top-bar a { color: white; text-decoration: none; margin-left: 20px; transition: var(--transition); }
+        
+        @media (hover: hover) and (pointer: fine) {
+            .top-bar a:hover { opacity: 0.8; }
+        }
+
+        header { 
+            display: flex; justify-content: space-between; align-items: center; padding: 20px 8%; 
+            background: rgba(255, 255, 255, 0.98); 
+            -webkit-backdrop-filter: blur(10px); 
+            backdrop-filter: blur(10px); 
+            position: -webkit-sticky; 
+            position: sticky; 
+            top: 40px; z-index: 1000; border-bottom: 2px solid var(--press-green); box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
+        }
+        .logo-container { display: flex; align-items: center; text-decoration: none; z-index: 2000; }
+        .logo-image { height: 90px; width: auto; display: block; transition: var(--transition); }
+        
+        @media (hover: hover) and (pointer: fine) {
+            .logo-container:hover .logo-image { transform: scale(1.05) rotate(-2deg); }
+        }
+        
+        nav { display: flex; align-items: center; margin-left: -35px; }
+        nav > a { 
+            margin-left: 25px; text-decoration: none; color: var(--text-dark); 
+            font-weight: 700; font-size: 16px; transition: var(--transition); 
+            text-transform: uppercase; letter-spacing: 0.5px; position: relative; white-space: nowrap;
+        }
+        nav > a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0; background-color: var(--press-green); transition: var(--transition); }
+        
+        @media (hover: hover) and (pointer: fine) {
+            nav > a:hover { color: var(--press-green); }
+            nav > a:hover::after { width: 100%; }
+        }
+        nav > a.active { color: var(--press-green); }
+        nav > a.active::after { width: 100%; }
+
+        /* ВЫПАДАЮЩЕЕ МЕНЮ */
+        .dropdown { position: relative; display: flex; align-items: center; margin-left: 25px; }
+        .dropdown .dropbtn { 
+            display: flex; align-items: center; gap: 6px; text-decoration: none; 
+            color: var(--text-dark); font-weight: 700; font-size: 16px; 
+            text-transform: uppercase; letter-spacing: 0.5px; position: relative; cursor: pointer; transition: var(--transition);
+        }
+        .dropdown .dropbtn::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0; background-color: var(--press-green); transition: var(--transition); }
+        
+        .arrow { font-size: 10px; transition: transform 0.3s ease; }
+        
+        @media (hover: hover) and (pointer: fine) {
+            .dropdown:hover .dropbtn { color: var(--press-green); }
+            .dropdown:hover .dropbtn::after { width: 100%; }
+            .dropdown:hover .arrow { transform: rotate(180deg); }
+        }
+        .dropdown.active .arrow { transform: rotate(180deg); }
+
+        @media (min-width: 1201px) {
+            .dropdown-content {
+                display: none; position: absolute; top: 100%; left: -10px;
+                background-color: rgba(255, 255, 255, 0.98); min-width: 220px;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.08); border-radius: 12px;
+                border-top: 3px solid var(--press-green); padding: 10px 0; z-index: 1001;
+                animation: fadeIn 0.3s ease-out;
+            }
+            @media (hover: hover) and (pointer: fine) {
+                .dropdown:hover .dropdown-content { display: block; }
+            }
+        }
+
+        .dropdown-content a {
+            margin: 0; padding: 12px 25px; display: block; font-size: 15px;
+            text-decoration: none; color: var(--text-dark); font-weight: 600; transition: var(--transition); text-transform: none;
+        }
+        
+        @media (hover: hover) and (pointer: fine) {
+            .dropdown-content a:hover { color: var(--press-green); background-color: var(--light-green); padding-left: 30px;}
+        }
+        .dropdown-content a.active { color: var(--press-green); background-color: var(--light-green); }
+
+        .btn { 
+            display: inline-block; background-color: var(--press-green); color: white; padding: 22px 50px; border-radius: 60px; text-decoration: none; font-weight: 700; box-shadow: 0 10px 25px rgba(45, 138, 78, 0.2); transition: var(--transition); position: relative; overflow: hidden; cursor: pointer; border: 2px solid transparent; font-size: 18px; 
+            -webkit-appearance: none; appearance: none;
+        }
+        
+        @media (hover: hover) and (pointer: fine) {
+            .btn:hover { background-color: var(--dark-green); transform: translateY(-3px); box-shadow: 0 15px 35px rgba(45, 138, 78, 0.3); }
+        }
+        .btn:active { transform: translateY(-1px); }
+
+        .btn-outline-hero { background: transparent; border: 2px solid var(--press-green); color: var(--text-dark); padding: 22px 50px; border-radius: 60px; text-decoration: none; font-weight: 700; display: inline-block; font-size: 18px; transition: var(--transition);}
+        
+        @media (hover: hover) and (pointer: fine) {
+            .btn-outline-hero:hover { background: var(--press-green); color: var(--white); border-color: var(--press-green); }
+        }
+
+        /* Мобильный телефон в шапке */
+        .mobile-phone { display: none; color: var(--press-green); align-items: center; justify-content: center; margin-right: 15px; z-index: 2000; }
+
+        /* Бургер меню */
+        .burger-menu { display: none; flex-direction: column; gap: 6px; cursor: pointer; z-index: 2000; }
+        .burger-menu span { width: 30px; height: 3px; background: var(--press-green); transition: var(--transition); border-radius: 3px; }
+        .burger-menu.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+        .burger-menu.active span:nth-child(2) { opacity: 0; }
+        .burger-menu.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+        /* === HERO СЕКЦИЯ ИЗ INDEX.HTML === */
+        .hero-banner {
+            position: relative; width: 100%; height: calc(100vh - 130px); height: calc(100dvh - 130px); min-height: 600px; max-height: 850px; overflow: hidden; background-color: #f5f7f6; display: flex; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .hero-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 1; visibility: visible; z-index: 2; }
+        .slide-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        .slide-bg img { width: 100%; height: 100%; object-fit: cover; }
+        .slide-bg::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.4) 40%, rgba(255,255,255,0) 100%); }
+        .slide-container { position: relative; z-index: 2; width: 100%; max-width: 1500px; margin: 0 auto; padding: 0 8%; display: flex; align-items: center; height: 100%; }
+        .slide-text { width: 100%; max-width: 750px; }
+        .slide-label { display: inline-block; font-weight: 700; color: var(--press-green); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; font-size: 14px; }
+        .slide-text h1 { font-size: clamp(42px, 5.5vw, 72px); line-height: 1.05; margin-bottom: 25px; color: var(--text-dark); font-weight: 800; }
+        .slide-text p { font-size: 22px; color: var(--text-muted); margin-bottom: 45px; line-height: 1.5; max-width: 650px; }
+        .slide-buttons { display: flex; gap: 15px; flex-wrap: wrap; }
+
+        /* === ВАКАНСИИ === */
+        .section { padding: 80px 8%; }
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-header h2 { font-size: 42px; margin-bottom: 15px; color: var(--dark-green); }
+        
+        .vacancies-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .vacancy-card { padding: 40px; background: var(--white); border-radius: 30px; border: 1px solid #eee; transition: var(--transition); display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
+        
+        @media (hover: hover) and (pointer: fine) {
+            .vacancy-card:hover { border-color: var(--press-green); transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+            .vacancy-card:hover h3 { color: var(--press-green); }
+        }
+        
+        .vacancy-icon { width: 50px; height: 50px; background: var(--light-green); border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: var(--press-green); }
+        .vacancy-card h3 { font-size: 24px; margin-bottom: 15px; color: var(--text-dark); line-height: 1.3; transition: var(--transition);}
+        .vacancy-salary { font-weight: 700; font-size: 16px; color: var(--press-green); margin-bottom: 25px; display: inline-block; background: var(--light-green); padding: 8px 15px; border-radius: 20px; border: 1px solid rgba(45, 138, 78, 0.2); }
+        .vacancy-reqs { margin-bottom: 30px; flex-grow: 1; list-style: none; padding-left: 0; }
+        .vacancy-reqs li { margin-bottom: 10px; color: var(--text-muted); font-size: 16px; position: relative; padding-left: 25px; }
+        .vacancy-reqs li::before { content: '✓'; position: absolute; left: 0; color: var(--press-green); font-weight: bold; }
+        
+        .btn-outline { display: block; width: 100%; background: transparent; color: var(--press-green); border: 2px solid var(--press-green); padding: 15px 25px; border-radius: 30px; text-align: center; font-weight: bold; cursor: pointer; transition: var(--transition); font-size: 16px; -webkit-appearance: none; appearance: none;}
+        
+        @media (hover: hover) and (pointer: fine) {
+            .btn-outline:hover { background: var(--press-green); color: var(--white); transform: translateY(-2px); box-shadow: 0 10px 20px rgba(45, 138, 78, 0.2);}
+        }
+
+        /* === ПОДВАЛ ИЗ INDEX.HTML === */
+        footer { padding: 80px 8% 60px 8%; background: var(--dark-green); color: #fff; text-align: left; }
+        .footer-logo { font-size: 32px; font-weight: 800; margin-bottom: 25px; display: inline-block; color: #fff; text-decoration: none; }
+        .footer-logo span { color: var(--light-green); }
+        .footer-contacts { display: flex; flex-wrap: wrap; gap: 40px; margin-top: 30px; }
+        .footer-contact-group { flex: 1; min-width: 250px; }
+        .footer-contact-group h3 { font-size: 20px; margin-bottom: 20px; color: #fff; opacity: 0.9; }
+        .footer-contact-item { display: flex; align-items: flex-start; margin-bottom: 15px; font-size: 16px; line-height: 1.5; color: rgba(255, 255, 255, 0.8); }
+        .footer-contact-item svg { margin-right: 15px; flex-shrink: 0; color: #4ade80; }
+        .footer-contact-item a { color: rgba(255, 255, 255, 0.8); text-decoration: none; transition: var(--transition); }
+        
+        @media (hover: hover) and (pointer: fine) {
+            .footer-contact-item a:hover { color: #fff; text-decoration: underline; }
+        }
+        .footer-bottom { margin-top: 60px; padding-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.1); text-align: center; font-size: 14px; color: rgba(255, 255, 255, 0.6); }
+
+        /* === МОДАЛЬНЫЕ ОКНА === */
+        .modal { display: none; position: fixed; z-index: 3000; padding-top: 50px; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.9); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); transition: var(--transition); }
+        .order-modal-content { background: white; margin: 5% auto; padding: 40px 50px; width: 90%; max-width: 500px; border-radius: 40px; position: relative; animation: slideDown 0.4s ease-out; box-shadow: 0 0 60px rgba(0,0,0,0.6); }
+        @keyframes slideDown { from {transform: translateY(-50px); opacity: 0;} to {transform: translateY(0); opacity: 1;} }
+        .close-btn { position: absolute; top: 25px; right: 30px; color: var(--text-dark); font-size: 35px; font-weight: 300; transition: var(--transition); cursor: pointer; line-height: 1; }
+        
+        @media (hover: hover) and (pointer: fine) {
+            .close-btn:hover { color: var(--press-green); transform: rotate(90deg); }
+        }
+        .form-group { margin-bottom: 18px; text-align: left;}
+        .form-group label { display: block; font-weight: 700; margin-bottom: 8px; font-size: 15px; color: var(--text-dark); }
+        .form-group label span { color: #d32f2f; margin-right: 3px; }
+        .form-group input, .form-group textarea { width: 100%; padding: 12px 15px; border: 1px solid #ccc; border-radius: 8px; font-family: inherit; font-size: 16px; transition: var(--transition); background: #f9f9f9; -webkit-appearance: none; appearance: none; }
+        .form-group input:focus, .form-group textarea:focus { background: #fff; border-color: var(--press-green); outline: none; box-shadow: 0 0 0 3px rgba(45, 138, 78, 0.1); }
+        .captcha-placeholder { background: #f9f9f9; border: 1px solid #d3d3d3; border-radius: 8px; padding: 15px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 25px; width: 100%; }
+        .captcha-left { display: flex; align-items: center; gap: 10px; }
+        .captcha-box { width: 28px; height: 28px; border: 2px solid #c1c1c1; background: white; border-radius: 4px; cursor: pointer; }
+        .captcha-text { font-size: 14px; font-weight: 600; color: #555; }
+        .submit-btn { width: 100%; padding: 15px; font-size: 18px; border-radius: 10px; margin-top: 10px; border: none; background-color: var(--press-green); color: white; font-weight: bold; cursor: pointer; transition: var(--transition); }
+        
+        @media (hover: hover) and (pointer: fine) {
+            .submit-btn:hover { background-color: var(--dark-green); transform: translateY(-2px); }
+        }
+        .success-msg { display: none; text-align: center; padding: 30px; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* === АДАПТИВ === */
+        @media (max-width: 1200px) {
+            body { padding-top: 0; }
+            header { top: 0; }
+            .top-bar { display: none; }
+            .logo-image { height: 60px; }
+            
+            .burger-menu { display: flex; }
+            .mobile-phone { display: flex; }
+            
+            nav { position: fixed; top: 0; right: -100%; width: 100%; height: 100vh; height: 100dvh; overflow-y: auto; padding: 80px 0 40px 0; background: rgba(255, 255, 255, 0.98); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); display: flex; flex-direction: column; justify-content: flex-start; align-items: center; transition: 0.4s cubic-bezier(0.77, 0, 0.175, 1); z-index: 1500; }
+            nav.active { right: 0; }
+            nav > a { margin: 15px 0; font-size: 22px; white-space: normal; } 
+            nav > a::after { display: none; }
+            nav .btn-order { margin: 30px 0 0 0 !important; padding: 18px 40px !important; font-size: 16px !important; width: auto;}
+
+            .dropdown { flex-direction: column; width: 100%; margin: 15px 0; align-items: center;}
+            .dropdown .dropbtn { font-size: 22px; white-space: normal; justify-content: center; }
+            .dropdown .dropbtn::after { display: none; }
+            
+            .dropdown-content { display: flex; flex-direction: column; align-items: center; background: transparent; box-shadow: none; border-top: none; min-width: 100%; padding: 0; max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out, margin-top 0.4s ease-in-out; }
+            .dropdown-content.show { max-height: 400px; opacity: 1; margin-top: 15px; }
+            .dropdown-content a { padding: 10px 0; font-size: 18px; margin: 0; }
+
+            .hero-banner { height: 80vh; height: 80dvh; min-height: 550px; display: block; }
+            .slide-bg::after { background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.85) 40%, rgba(255,255,255,0.2) 100%); }
+            .slide-container { align-items: center; padding-bottom: 80px; padding-top: 60px; }
+            .slide-text { max-width: 100%; text-align: left; }
+            .slide-text h1 { font-size: 38px; margin-bottom: 15px; }
+        }
+        @media (max-width: 600px) {
+            .section { padding: 60px 5%; }
+            .section-header h2 { font-size: 32px; }
+            
+            .hero-banner { min-height: 500px !important; height: calc(100dvh - 80px) !important; }
+            .slide-container { height: 100% !important; padding-top: 40px !important; padding-bottom: 0 !important; align-items: flex-start !important; }
+            .slide-text { display: flex !important; flex-direction: column !important; height: 100% !important; width: 100% !important; }
+            .slide-text h1 { font-size: 34px !important; margin-bottom: 10px !important; }
+            .slide-text p { font-size: 16px !important; margin-bottom: 15px !important; line-height: 1.4 !important; }
+            .slide-label { margin-bottom: 10px !important; }
+            .slide-buttons { display: flex; flex-direction: column; gap: 10px; width: 100%; margin-top: auto !important; margin-bottom: 40px !important; }
+            .slide-buttons .btn, .slide-buttons .btn-outline-hero { width: 100%; margin: 0; text-align: center; padding: 16px 20px !important; font-size: 16px !important; }
+
+            .order-modal-content { padding: 40px 20px; width: 95%; margin: 5% auto; }
+            footer { padding: 40px 5% 20px 5%; }
+            .footer-contacts { flex-direction: column; gap: 30px; }
+            .captcha-placeholder { flex-direction: column; gap: 15px; }
+            .captcha-left { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div>Типография полного цикла в Нижнем Новгороде</div>
+        <div>
+            <a href="tel:88007006099">8 (800) 700-60-99</a>
+            <a href="mailto:rost@rost.nnov.ru">rost@rost.nnov.ru</a>
+        </div>
+    </div>
+
+    <header data-aos="fade-down" data-aos-duration="800">
+        <a href="index.html" class="logo-container">
+            <img src="logo.webp" alt="Логотип ПрессРост" class="logo-image" onerror="this.style.display='none'">
+        </a>
+        
+        <div style="display: flex; align-items: center;">
+            <a href="tel:88007006099" class="mobile-phone">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </a>
+            <div class="burger-menu" id="burgerMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav>
+            <div class="dropdown" id="aboutDropdown">
+                <a href="#" class="dropbtn active" id="aboutBtn">О нас <span class="arrow">▼</span></a>
+                <div class="dropdown-content" id="aboutDropdownContent">
+                    <a href="firm.html">О компании</a>
+                    <a href="news.html">Новости</a>
+                    <a href="vacancies.html" class="active">Вакансии</a>
+                    <a href="contacts.html">Контакты</a>
+                    <a href="index.html#faq">FAQ</a>
+                </div>
+            </div>
+            
+            <a href="index.html#products">Продукция</a>
+            <a href="index.html#technologies">Технологии</a>
+            <a href="chestny-znak.html">Маркировка</a>
+            <a href="index.html#info-hub">Инфоцентр</a>
+            <button class="btn btn-order" id="headerOrderBtn" style="padding: 12px 25px; font-size: 13px; margin-left: 20px;">Заказать расчет</button>
+        </nav>
+    </header>
+
+    <section class="hero-banner">
+        <div class="hero-slide">
+            <div class="slide-bg">
+                <img src="vacancies.webp" alt="Работа в компании РОСТ" onerror="this.src='hero1.webp'">
+            </div>
+            
+            <div class="slide-container">
+                <div class="slide-text">
+                    <span class="slide-label">Карьера в компании</span>
+                    <h1>Работа в компании РОСТ</h1>
+                    <p>Мы — современное производственное предприятие. Если вы цените стабильность, профессиональный рост и работу на передовом оборудовании — добро пожаловать в команду!</p>
+                    <div class="slide-buttons">
+                        <button class="btn btn-order" id="heroApplyBtn">Отправить резюме</button>
+                        <a href="#vacancies-list" class="btn btn-outline-hero">Смотреть вакансии</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="vacancies-list">
+        <div class="section-header" data-aos="fade-up">
+            <h2>Открытые вакансии</h2>
+            <p>Станьте частью команды профессионалов</p>
+        </div>
+
+        <div class="vacancies-grid">
+            
+            <div class="vacancy-card" data-aos="fade-up" data-aos-delay="0">
+                <div class="vacancy-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                </div>
+                <h3>Оператор флексографской печати</h3>
+                <div class="vacancy-salary">от 120 000 руб.</div>
+                <ul class="vacancy-reqs">
+                    <li>Опыт работы на узкорулонных флексомашинах от 1 года.</li>
+                    <li>Знание процессов приладки и контроля качества продукции.</li>
+                    <li>Сменный график работы на производстве.</li>
+                </ul>
+                <button class="btn-outline apply-btn" data-vacancy="Оператор флексографской печати">Откликнуться</button>
+            </div>
+
+            <div class="vacancy-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="vacancy-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <h3>Менеджер по продажам (B2B)</h3>
+                <div class="vacancy-salary">Оклад + % (от 80 000 руб.)</div>
+                <ul class="vacancy-reqs">
+                    <li>Опыт активных продаж в сегменте B2B (полиграфия — плюс).</li>
+                    <li>Поиск новых клиентов, ведение переговоров и договоров.</li>
+                    <li>График 5/2, работа в современном комфортном офисе.</li>
+                </ul>
+                <button class="btn-outline apply-btn" data-vacancy="Менеджер по продажам (B2B)">Откликнуться</button>
+            </div>
+
+            <div class="vacancy-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="vacancy-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                </div>
+                <h3>Специалист препресс (Допечатник)</h3>
+                <div class="vacancy-salary">По результатам собеседования</div>
+                <ul class="vacancy-reqs">
+                    <li>Отличное знание Adobe Illustrator, Photoshop, Acrobat.</li>
+                    <li>Подготовка макетов к флексо и цифровой печати (цветоделение).</li>
+                    <li>Внимательность к деталям, профилирование и цветокоррекция.</li>
+                </ul>
+                <button class="btn-outline apply-btn" data-vacancy="Специалист препресс">Откликнуться</button>
+            </div>
+
+        </div>
+    </section>
+
+    <footer data-aos="fade-up">
+        <div class="footer-contacts">
+            <div class="footer-contact-group">
+                <h3 class="footer-logo">Типография РОСТ</h3>
+                <div class="footer-contact-item">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    603032, г. Нижний Новгород, ул. Памирская, 11, лит. В
+                </div>
+                <div class="footer-contact-item">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                    Наш офис работает с 08:30 до 17:00 по будням
+                </div>
+                <div class="footer-contact-item">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    Производство: 24/7
+                </div>
+            </div>
+            
+            <div class="footer-contact-group">
+                <h3>Телефоны</h3>
+                <div class="footer-contact-item">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    <div>
+                        <a href="tel:+78312205031">+7 (831) 220-50-31</a><br>
+                        <a href="tel:+78312205033">+7 (831) 220-50-33</a><br>
+                        <a href="tel:+78312205035">+7 (831) 220-50-35</a>
+                    </div>
+                </div>
+                <div class="footer-contact-item">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    <a href="tel:88007006099">8 (800) 700-60-99</a> <span style="font-size: 14px; margin-left: 10px; opacity: 0.8;">(бесплатно из РФ)</span>
+                </div>
+            </div>
+
+            <div class="footer-contact-group">
+                <h3>Электронная почта</h3>
+                <div class="footer-contact-item">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    <a href="mailto:rost@rost.nnov.ru">rost@rost.nnov.ru</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 ООО «Типография РОСТ». Все права защищены. ИНН 5257109496</p>
+        </div>
+    </footer>
+
+    <div id="vacancyModal" class="modal">
+        <div class="order-modal-content">
+            <span class="close-btn" id="closeVacancyModal">&times;</span>
+            <div id="vacancyFormContainer">
+                <h2 id="modalTitle" style="margin-bottom: 25px; font-weight: 800; font-size: 32px; text-align: center;">Отклик на вакансию</h2>
+                <form id="vacancyForm">
+                    <div class="form-group" id="jobTitleGroup">
+                        <label><span>*</span>Желаемая должность:</label>
+                        <input type="text" id="vacancyInput" placeholder="Укажите должность" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><span>*</span>ФИО или Имя:</label>
+                        <input type="text" placeholder="Иван Иванов" required>
+                    </div>
+                    <div class="form-group">
+                        <label><span>*</span>Телефон:</label>
+                        <input type="tel" placeholder="+7 (___) ___-__-__" required>
+                    </div>
+                    
+                    <div class="form-group" id="resumeLinkGroup">
+                        <label>Ссылка на резюме (HH.ru, Яндекс.Диск и т.д.):</label>
+                        <input type="url" placeholder="https://...">
+                    </div>
+                    
+                    <div class="captcha-placeholder">
+                        <div class="captcha-left"><div class="captcha-box" onclick="this.style.background='#2d8a4e'; this.innerHTML='✓'; this.style.color='white'; this.style.textAlign='center'; this.style.lineHeight='24px';"></div><div class="captcha-text">Я не робот</div></div>
+                        <div class="captcha-right" style="text-align: center;"><img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" width="30" alt="reCAPTCHA" loading="lazy"><div style="font-size: 10px; color: #555; font-weight: bold; line-height: 1;">reCAPTCHA</div></div>
+                    </div>
+                    <button type="submit" class="btn submit-btn" id="submitBtnText">Отправить резюме</button>
+                </form>
+            </div>
+            <div id="successMessage" class="success-msg">
+                <div style="font-size: 60px; margin-bottom: 15px;">✅</div>
+                <h2 id="successTitle">Резюме отправлено!</h2>
+                <p style="color: var(--text-muted); margin-top: 10px;" id="successDesc">HR-отдел свяжется с вами в ближайшее время.</p>
+                <button class="btn" id="closeSuccess" style="margin-top: 25px; padding: 12px 35px;">Закрыть</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Инициализация анимаций
+        document.addEventListener("DOMContentLoaded", function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({ duration: 800, once: true, offset: 50 });
+            }
+        });
+
+        // Бургер-меню
+        const burgerMenuBtn = document.getElementById('burgerMenu');
+        const mobileNavMenu = document.querySelector('nav');
+        const mobileNavLinks = document.querySelectorAll('nav > a:not(.dropbtn), nav button, .dropdown-content a');
+
+        burgerMenuBtn.addEventListener('click', () => {
+            burgerMenuBtn.classList.toggle('active');
+            mobileNavMenu.classList.toggle('active');
+            document.body.style.overflow = mobileNavMenu.classList.contains('active') ? 'hidden' : 'auto';
+        });
+
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                burgerMenuBtn.classList.remove('active');
+                mobileNavMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
+                if (window.innerWidth <= 1200) {
+                    document.getElementById('aboutDropdownContent').classList.remove('show');
+                    document.getElementById('aboutDropdown').classList.remove('active');
+                }
+            });
+        });
+
+        // Выпадающее меню для "О нас" на мобильных
+        const aboutBtn = document.getElementById('aboutBtn');
+        const aboutDropdownContent = document.getElementById('aboutDropdownContent');
+        const aboutDropdown = document.getElementById('aboutDropdown');
+
+        if(aboutBtn) {
+            aboutBtn.addEventListener('click', function(e) {
+                if (window.innerWidth <= 1200) {
+                    e.preventDefault(); 
+                    aboutDropdownContent.classList.toggle('show');
+                    aboutDropdown.classList.toggle('active');
+                }
+            });
+        }
+
+        // Модальное окно (универсальное для отклика и заявки на расчет)
+        const vacancyModal = document.getElementById("vacancyModal");
+        const headerOrderBtn = document.getElementById("headerOrderBtn");
+        const heroApplyBtn = document.getElementById("heroApplyBtn");
+        const applyBtns = document.querySelectorAll(".apply-btn");
+        const closeVacancyModalBtn = document.getElementById("closeVacancyModal");
+        const closeSuccessBtn = document.getElementById("closeSuccess");
+        
+        const vacancyForm = document.getElementById("vacancyForm");
+        const vacancyFormContainer = document.getElementById("vacancyFormContainer");
+        const successMessage = document.getElementById("successMessage");
+        const vacancyInput = document.getElementById("vacancyInput");
+        
+        const modalTitle = document.getElementById("modalTitle");
+        const jobTitleGroup = document.getElementById("jobTitleGroup");
+        const resumeLinkGroup = document.getElementById("resumeLinkGroup");
+        const submitBtnText = document.getElementById("submitBtnText");
+        const successTitle = document.getElementById("successTitle");
+        const successDesc = document.getElementById("successDesc");
+
+        // Открытие формы отклика из карточки и hero
+        const setupApplyModal = function(vacancyName) {
+            modalTitle.textContent = "Отклик на вакансию";
+            jobTitleGroup.style.display = "block";
+            resumeLinkGroup.style.display = "block";
+            submitBtnText.textContent = "Отправить резюме";
+            successTitle.textContent = "Резюме отправлено!";
+            successDesc.textContent = "HR-отдел свяжется с вами в ближайшее время.";
+            
+            vacancyInput.value = vacancyName;
+            openModal();
+        };
+
+        applyBtns.forEach(btn => {
+            btn.onclick = function() {
+                setupApplyModal(this.getAttribute('data-vacancy') || '');
+            }
+        });
+
+        if(heroApplyBtn) {
+            heroApplyBtn.onclick = function() {
+                setupApplyModal('Отклик с главного экрана');
+            }
+        }
+
+        // Открытие формы "Заказать расчет" из шапки
+        if(headerOrderBtn) {
+            headerOrderBtn.onclick = function() {
+                modalTitle.textContent = "Заявка на расчет";
+                jobTitleGroup.style.display = "none";
+                resumeLinkGroup.style.display = "none";
+                submitBtnText.textContent = "Отправить заявку";
+                successTitle.textContent = "Спасибо за заявку!";
+                successDesc.textContent = "Наш менеджер свяжется с вами в ближайшее время.";
+                
+                vacancyInput.value = 'Заявка на расчет (клиент)';
+                
+                burgerMenuBtn.classList.remove('active');
+                mobileNavMenu.classList.remove('active');
+                openModal();
+            }
+        }
+
+        function openModal() {
+            vacancyModal.style.display = "block";
+            document.body.style.overflow = "hidden";
+            vacancyFormContainer.style.display = "block";
+            successMessage.style.display = "none";
+            vacancyForm.reset();
+        }
+
+        const hideModal = () => {
+            vacancyModal.style.display = "none";
+            document.body.style.overflow = "auto";
+        };
+
+        closeVacancyModalBtn.onclick = hideModal;
+        closeSuccessBtn.onclick = hideModal;
+
+        window.onclick = function(event) {
+            if (event.target == vacancyModal) hideModal();
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape" && vacancyModal.style.display === "block") {
+                hideModal();
+            }
+        });
+
+        vacancyForm.onsubmit = function(e) {
+            e.preventDefault();
+            vacancyFormContainer.style.display = "none";
+            successMessage.style.display = "block";
+        }
+    </script>
+</body>
+</html>
