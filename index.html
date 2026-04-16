@@ -803,7 +803,7 @@
 
         <div id="tab-industries" class="product-tab-content active">
             <div class="catalog-grid">
-                <div class="product-card" data-category="Алкогольная продукция" data-type="industry" data-prefix="alcohol" data-img="alcohol.webp" data-aos="fade-up" data-aos-delay="0">
+                <div class="product-card" data-category="Алкогольная продукция" data-type="industry" data-prefix="alcohol" data-images-count="12" data-img="alcohol.webp" data-aos="fade-up" data-aos-delay="0">
                     <div class="product-img">
                         <div class="img-placeholder" style="display: none;">alcohol.webp</div>
                         <img src="alcohol.webp" alt="Этикетка для алкоголя" loading="lazy" onerror="this.previousElementSibling.style.display='block'; this.style.display='none';">
@@ -941,7 +941,7 @@
                     </div>
                 </div>
                 <!-- НОВАЯ КАРТОЧКА БОПП -->
-                <div class="product-card" data-category="БОПП" data-type="product" data-prefix="bopp" data-aos="fade-up" data-aos-delay="300">
+                <div class="product-card" data-category="БОПП" data-type="product" data-prefix="bopp" data-images-count="5" data-aos="fade-up" data-aos-delay="300">
                     <div class="product-img">
                         <div class="img-placeholder" style="display: none;">bopp.webp</div>
                         <img src="bopp.webp" alt="БОПП этикетки" loading="lazy" onerror="this.previousElementSibling.style.display='block'; this.style.display='none';">
@@ -1213,7 +1213,7 @@
                 <p>Участие в выставках, запуск нового оборудования и важные события из жизни типографии.</p>
                 <div class="info-icon">📰</div>
             </a>
-            <a href="articles.html" class="info-card" data-aos="fade-up" data-aos-delay="100">
+            <a href="#" class="info-card" data-aos="fade-up" data-aos-delay="100">
                 <h3>СОУТ</h3>
                 <p>Сводные данные о результатах проведения специальной оценки условий труда на рабочих местах нашего производства.</p>
                 <div class="info-icon">📋</div>
@@ -1535,12 +1535,13 @@
             cat: c.getAttribute('data-category'), 
             type: c.getAttribute('data-type'), 
             img: c.querySelector('img').src, 
-            prefix: c.getAttribute('data-prefix')
+            prefix: c.getAttribute('data-prefix'),
+            imagesCount: parseInt(c.getAttribute('data-images-count')) || 8
         }));
         
         let currentCategoryIndex = -1; // Для свайпов по оверлею
 
-        function openCategory(categoryName, type, prefix) {
+        function openCategory(categoryName, type, prefix, imagesCount = 8) {
             burgerMenuBtn.classList.remove('active');
             mobileNavMenu.classList.remove('active');
             
@@ -1552,7 +1553,7 @@
 
             let catImages = [];
 
-            for (let i = 1; i <= 8; i++) {
+            for (let i = 1; i <= imagesCount; i++) {
                 const imgSrc = prefix ? `${prefix}_${i}.webp` : `https://via.placeholder.com/800x600/eee/999?text=Пример+${i}`;
                 catImages.push(imgSrc);
 
@@ -1596,7 +1597,7 @@
                 const card = document.createElement('div');
                 card.className = 'carousel-card';
                 card.innerHTML = `<img src="${item.img}" onerror="this.src='https://via.placeholder.com/400x300/eee/999'"><div class="carousel-card-info"><h4>${item.cat}</h4><span>Узнать больше →</span></div>`;
-                card.onclick = () => openCategory(item.cat, item.type, item.prefix);
+                card.onclick = () => openCategory(item.cat, item.type, item.prefix, item.imagesCount);
                 track.appendChild(card);
             });
         }
@@ -1630,7 +1631,8 @@
                 const category = this.getAttribute('data-category');
                 const type = this.getAttribute('data-type');
                 const prefix = this.getAttribute('data-prefix'); 
-                if (category && prefix) { openCategory(category, type, prefix); }
+                const imagesCount = parseInt(this.getAttribute('data-images-count')) || 8;
+                if (category && prefix) { openCategory(category, type, prefix, imagesCount); }
             });
         });
 
@@ -1679,14 +1681,14 @@
             if (currentCategoryIndex < 0) return;
             let nextIdx = (currentCategoryIndex + 1) % catalogData.length;
             let nextCat = catalogData[nextIdx];
-            openCategory(nextCat.cat, nextCat.type, nextCat.prefix);
+            openCategory(nextCat.cat, nextCat.type, nextCat.prefix, nextCat.imagesCount);
         }
 
         function prevCategory() {
             if (currentCategoryIndex < 0) return;
             let prevIdx = (currentCategoryIndex - 1 + catalogData.length) % catalogData.length;
             let prevCat = catalogData[prevIdx];
-            openCategory(prevCat.cat, prevCat.type, prevCat.prefix);
+            openCategory(prevCat.cat, prevCat.type, prevCat.prefix, prevCat.imagesCount);
         }
 
         // Подключаем свайп для Оверлея категории (игнорируя нижнюю карусель)
