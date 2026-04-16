@@ -462,6 +462,13 @@
         @media (hover: hover) and (pointer: fine) {
             .close-btn:hover { color: var(--press-green); transform: rotate(90deg); }
         }
+        
+        /* Стили кнопок-стрелочек для лайтбокса */
+        .lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); font-size: 60px; color: rgba(255,255,255,0.7); cursor: pointer; user-select: none; z-index: 3001; transition: 0.3s; padding: 20px; display: none; }
+        .lightbox-nav.prev { left: 20px; }
+        .lightbox-nav.next { right: 20px; }
+        @media(hover:hover) { .lightbox-nav:hover { color: var(--press-green); } }
+
         .form-group { margin-bottom: 18px; text-align: left;}
         .form-group label { display: block; font-weight: 700; margin-bottom: 8px; font-size: 15px; color: var(--text-dark); }
         .form-group label span { color: #d32f2f; margin-right: 3px; }
@@ -602,6 +609,11 @@
             .lead-input { width: 100%; }
             .captcha-placeholder { flex-direction: column; gap: 15px; }
             .captcha-left { width: 100%; justify-content: center; }
+            
+            /* Лайтбокс на мобильных */
+            .lightbox-nav { font-size: 40px; padding: 10px; }
+            .lightbox-nav.prev { left: 5px; }
+            .lightbox-nav.next { right: 5px; }
         }
     </style>
 </head>
@@ -655,12 +667,11 @@
             
         <div class="hero-slide active">
             <div class="slide-bg">
-    <picture>
-        <source media="(max-width: 768px)" srcset="hero1-mobile.webp">
-        <img src="hero1.webp" alt="Фон производства">
-    </picture>
-</div>
-            
+                <picture>
+                    <source media="(max-width: 768px)" srcset="hero1-mobile.webp">
+                    <img src="hero1.webp" alt="Фон производства">
+                </picture>
+            </div>
             <div class="slide-container">
                 <div class="slide-text">
                     <span class="slide-label">Инновационная печать</span>
@@ -676,12 +687,11 @@
 
         <div class="hero-slide">
             <div class="slide-bg">
-    <picture>
-        <source media="(max-width: 768px)" srcset="hero2-mobile.webp">
-        <img src="hero2.webp" alt="Фон склад рулонов">
-    </picture>
-</div>
-            
+                <picture>
+                    <source media="(max-width: 768px)" srcset="hero2-mobile.webp">
+                    <img src="hero2.webp" alt="Фон склад рулонов">
+                </picture>
+            </div>
             <div class="slide-container">
                 <div class="slide-text">
                     <span class="slide-label">Надежный партнер</span>
@@ -695,12 +705,33 @@
             </div>
         </div>
 
+        <!-- ТРЕТИЙ СЛАЙД: АНОНСЫ -->
+        <div class="hero-slide">
+            <div class="slide-bg">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="hero3-mobile.webp">
+                    <img src="hero3.webp" alt="Фон анонсы и новости">
+                </picture>
+            </div>
+            <div class="slide-container">
+                <div class="slide-text">
+                    <span class="slide-label">События и выставки</span>
+                    <h1>Анонсы и важные новости нашей типографии</h1>
+                    <p>Будьте в курсе последних технологических новинок, наших достижений и предстоящих мероприятий.</p>
+                    <div class="slide-buttons">
+                        <button class="btn btn-order">Оставить заявку</button>
+                        <a href="news.html" class="btn btn-outline-hero">Смотреть новости</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="slider-controls">
             <button class="slider-btn prev-btn">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
             </button>
             <div class="slider-pagination">
-                <span class="current">01</span> / <span class="total">02</span>
+                <span class="current">01</span> / <span class="total">03</span>
             </div>
             <button class="slider-btn next-btn">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
@@ -906,6 +937,18 @@
                     <div class="product-info">
                         <h3>Цифровой трафарет и тиснение</h3>
                         <p>Премиальная отделка без затрат на печатные формы.</p>
+                        <div class="open-catalog-hint">Открыть каталог →</div>
+                    </div>
+                </div>
+                <!-- НОВАЯ КАРТОЧКА БОПП -->
+                <div class="product-card" data-category="БОПП" data-type="product" data-prefix="bopp" data-aos="fade-up" data-aos-delay="300">
+                    <div class="product-img">
+                        <div class="img-placeholder" style="display: none;">bopp.webp</div>
+                        <img src="bopp.webp" alt="БОПП этикетки" loading="lazy" onerror="this.previousElementSibling.style.display='block'; this.style.display='none';">
+                    </div>
+                    <div class="product-info">
+                        <h3>БОПП этикетки</h3>
+                        <p>Круговая этикетка для ПЭТ-тары: прочность, влагостойкость и выгода на больших тиражах.</p>
                         <div class="open-catalog-hint">Открыть каталог →</div>
                     </div>
                 </div>
@@ -1170,12 +1213,13 @@
                 <p>Участие в выставках, запуск нового оборудования и важные события из жизни типографии.</p>
                 <div class="info-icon">📰</div>
             </a>
-            <a href="#" class="info-card" data-aos="fade-up" data-aos-delay="100">
-                <h3>Техническая документация</h3>
-                <p>Требования к макетам, профили цветоделения и стандарты качества (ГОСТ).</p>
-                <div class="info-icon">⚙️</div>
+            <a href="articles.html" class="info-card" data-aos="fade-up" data-aos-delay="100">
+                <h3>СОУТ</h3>
+                <p>Сводные данные о результатах проведения специальной оценки условий труда на рабочих местах нашего производства.</p>
+                <div class="info-icon">📋</div>
             </a>
-            <a href="#" class="info-card" data-aos="fade-up" data-aos-delay="200">
+            <!-- ИЗМЕНЕНА ССЫЛКА НА ARTICLES.HTML -->
+            <a href="articles.html" class="info-card" data-aos="fade-up" data-aos-delay="200">
                 <h3>Полезные статьи</h3>
                 <p>Гид по выбору материалов, виды отделки и советы по созданию продающей этикетки.</p>
                 <div class="info-icon">💡</div>
@@ -1230,7 +1274,13 @@
         </div>
     </footer>
 
-    <div id="imageModal" class="modal"><span class="close-btn" id="closeImgModal">&times;</span><img class="modal-content" id="modalImg"></div>
+    <!-- ДОБАВЛЕНЫ КНОПКИ ДЛЯ СВАЙПЕРА КАРТИНОК В ЛАЙТБОКСЕ -->
+    <div id="imageModal" class="modal">
+        <span class="close-btn" id="closeImgModal">&times;</span>
+        <span class="lightbox-nav prev" id="prevImgBtn">‹</span>
+        <img class="modal-content" id="modalImg">
+        <span class="lightbox-nav next" id="nextImgBtn">›</span>
+    </div>
 
     <div id="orderModal" class="modal" style="background-color: rgba(0,0,0,0.6);">
         <div class="order-modal-content">
@@ -1353,22 +1403,60 @@
             });
         });
 
+        // --- ЛОГИКА LIGHTBOX И СВАЙПОВ ---
         const modal = document.getElementById("imageModal");
         const modalImg = document.getElementById("modalImg");
         const closeImgModalBtn = document.getElementById("closeImgModal");
-        const images = document.querySelectorAll(".zoomable");
+        
+        let currentLightboxImages = [];
+        let currentLightboxIndex = 0;
 
-        window.openLightbox = function(src) {
+        // Открытие полноэкранного просмотра. Поддерживает как массив картинок, так и одну картинку.
+        window.openLightbox = function(srcOrIndex, imagesArray = null) {
             burgerMenuBtn.classList.remove('active');
             mobileNavMenu.classList.remove('active');
             modal.style.display = "block";
-            modalImg.src = src;
+            
+            if (Array.isArray(imagesArray)) {
+                currentLightboxImages = imagesArray;
+                currentLightboxIndex = typeof srcOrIndex === 'number' ? srcOrIndex : 0;
+                document.getElementById('prevImgBtn').style.display = 'block';
+                document.getElementById('nextImgBtn').style.display = 'block';
+                updateLightboxImage();
+            } else {
+                currentLightboxImages = [srcOrIndex];
+                currentLightboxIndex = 0;
+                document.getElementById('prevImgBtn').style.display = 'none';
+                document.getElementById('nextImgBtn').style.display = 'none';
+                modalImg.src = srcOrIndex;
+            }
         }
 
+        function updateLightboxImage() {
+            modalImg.src = currentLightboxImages[currentLightboxIndex];
+        }
+
+        function nextLightboxImg() {
+            if (currentLightboxImages.length <= 1) return;
+            currentLightboxIndex = (currentLightboxIndex + 1) % currentLightboxImages.length;
+            updateLightboxImage();
+        }
+
+        function prevLightboxImg() {
+            if (currentLightboxImages.length <= 1) return;
+            currentLightboxIndex = (currentLightboxIndex - 1 + currentLightboxImages.length) % currentLightboxImages.length;
+            updateLightboxImage();
+        }
+
+        document.getElementById('nextImgBtn').onclick = nextLightboxImg;
+        document.getElementById('prevImgBtn').onclick = prevLightboxImg;
+
+        // Инициализация одиночных картинок (например для datamatrix)
+        const images = document.querySelectorAll(".zoomable");
         images.forEach(img => {
             img.onclick = function(e) {
                 if (this.closest('.product-card')) return;
-                openLightbox(this.src);
+                openLightbox(this.src); // Одиночный режим
             }
         });
 
@@ -1430,7 +1518,8 @@
             "Цифровая этикетка": "Идеально для стартапов, пробных партий и малых тиражей. Позволяет печатать с переменными данными быстро и без затрат на печатные формы.",
             "Честный Знак": "Надежная печать кодов Data Matrix с гарантией 100% считываемости. Строгий автоматизированный контроль качества на линии производства.",
             "Трафаретная печать": "Премиальная отделка, насыщенные цвета и ощутимый объем краски. Идеально подходит для выделения логотипов и фирменных элементов.",
-            "Цифровой трафарет и тиснение": "Эксклюзивная отделка: объемный лак и фольга без затрат на металлические клише. Максимальная гибкость при производстве премиум-сегмента."
+            "Цифровой трафарет и тиснение": "Эксклюзивная отделка: объемный лак и фольга без затрат на металлические клише. Максимальная гибкость при производстве премиум-сегмента.",
+            "БОПП": "Круговая полипропиленовая этикетка (БОПП) — идеальный выбор для массового производства напитков, питьевой воды и молочной продукции в ПЭТ-бутылках. Отличается высокой прочностью на разрыв, абсолютной влагостойкостью и способностью выдерживать перепады температур. Благодаря превосходным печатным свойствам обеспечивается безупречная цветопередача. Это наиболее экономичный и эффективный вариант для высокоскоростных автоматических линий этикетирования."
         };
 
         const catalogOverlay = document.getElementById('catalogOverlay');
@@ -1448,27 +1537,37 @@
             img: c.querySelector('img').src, 
             prefix: c.getAttribute('data-prefix')
         }));
+        
+        let currentCategoryIndex = -1; // Для свайпов по оверлею
 
         function openCategory(categoryName, type, prefix) {
             burgerMenuBtn.classList.remove('active');
             mobileNavMenu.classList.remove('active');
             
+            currentCategoryIndex = catalogData.findIndex(c => c.cat === categoryName);
+
             overlayTitle.textContent = categoryName;
             overlayDesc.innerHTML = categoryDescriptions[categoryName] || "Профессиональная печать этикеток высшего качества.";
             overlayGrid.innerHTML = '';
 
+            let catImages = [];
+
             for (let i = 1; i <= 8; i++) {
+                const imgSrc = prefix ? `${prefix}_${i}.webp` : `https://via.placeholder.com/800x600/eee/999?text=Пример+${i}`;
+                catImages.push(imgSrc);
+
                 const item = document.createElement('div');
                 item.className = 'gallery-item';
                 
                 const img = document.createElement('img');
-                const imgSrc = prefix ? `${prefix}_${i}.webp` : `https://via.placeholder.com/800x600/eee/999?text=Пример+${i}`;
                 img.src = imgSrc;
                 img.alt = `${categoryName} пример ${i}`;
                 img.loading = 'lazy'; 
                 
                 img.onerror = function() { item.style.display = 'none'; };
-                item.onclick = () => openLightbox(imgSrc);
+                
+                // Передаем индекс в функцию лайтбокса
+                item.onclick = (function(idx) { return function() { openLightbox(idx, catImages); } })(i - 1);
 
                 const caption = document.createElement('div');
                 caption.className = 'gallery-caption';
@@ -1539,11 +1638,72 @@
         overlayCloseBtn.onclick = closeCategory;
         overlayCloseBottomBtn.onclick = closeCategory;
 
+        // --- УНИВЕРСАЛЬНЫЙ ОБРАБОТЧИК СВАЙПОВ ---
+        function handleSwipe(element, onSwipeLeft, onSwipeRight, ignoreClass) {
+            let touchstartX = 0;
+            let touchendX = 0;
+            let touchstartY = 0;
+            let touchendY = 0;
+
+            element.addEventListener('touchstart', e => {
+                touchstartX = e.changedTouches[0].screenX;
+                touchstartY = e.changedTouches[0].screenY;
+            }, {passive: true});
+
+            element.addEventListener('touchend', e => {
+                // Если указан класс исключения, и свайп был внутри него, игнорируем
+                if (ignoreClass && e.target.closest('.' + ignoreClass)) return; 
+                
+                touchendX = e.changedTouches[0].screenX;
+                touchendY = e.changedTouches[0].screenY;
+                handleGesture();
+            }, {passive: true});
+
+            function handleGesture() {
+                const diffX = touchendX - touchstartX;
+                const diffY = touchendY - touchstartY;
+                
+                // Проверяем, что свайп был горизонтальным (по X больше чем по Y) и достаточно длинным (более 50px)
+                if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+                    if (diffX < 0) onSwipeLeft(); // Свайп влево
+                    if (diffX > 0) onSwipeRight(); // Свайп вправо
+                }
+            }
+        }
+
+        // Подключаем свайп для Лайтбокса
+        handleSwipe(document.getElementById('imageModal'), nextLightboxImg, prevLightboxImg);
+
+        // Функции для переключения целой категории
+        function nextCategory() {
+            if (currentCategoryIndex < 0) return;
+            let nextIdx = (currentCategoryIndex + 1) % catalogData.length;
+            let nextCat = catalogData[nextIdx];
+            openCategory(nextCat.cat, nextCat.type, nextCat.prefix);
+        }
+
+        function prevCategory() {
+            if (currentCategoryIndex < 0) return;
+            let prevIdx = (currentCategoryIndex - 1 + catalogData.length) % catalogData.length;
+            let prevCat = catalogData[prevIdx];
+            openCategory(prevCat.cat, prevCat.type, prevCat.prefix);
+        }
+
+        // Подключаем свайп для Оверлея категории (игнорируя нижнюю карусель)
+        handleSwipe(document.querySelector('.overlay-content'), nextCategory, prevCategory, 'carousel-track-container');
+
+        // Клавиатура (ESC и Стрелочки)
         document.addEventListener('keydown', function(event) {
             if (event.key === "Escape") {
                 if (modal.style.display === "block") { modal.style.display = "none"; } 
                 else if (orderModal.style.display === "block") { hideOrderModal(); }
                 else if (catalogOverlay.classList.contains('active')) { closeCategory(); }
+            }
+            if (event.key === "ArrowRight") {
+                if (modal.style.display === "block") nextLightboxImg();
+            }
+            if (event.key === "ArrowLeft") {
+                if (modal.style.display === "block") prevLightboxImg();
             }
         });
 
@@ -1621,6 +1781,7 @@
             });
         }
 
+        // ОБНОВЛЕННЫЙ СЛАЙДЕР HERO
         function initCustomHeroSlider() {
             const slides = document.querySelectorAll('.hero-slide');
             if (slides.length === 0) return;
@@ -1662,30 +1823,30 @@
         window.onload = initCustomHeroSlider;
 		
 		document.addEventListener("DOMContentLoaded", function() {
-    // Настройки "радара" (Intersection Observer)
-    const options = {
-        root: null, // следим относительно окна браузера
-        // Создаем узкую вертикальную полосу в центре экрана (-50% слева и -50% справа)
-        rootMargin: '0px -50% 0px -50%', 
-        threshold: 0
-    };
+            // Настройки "радара" (Intersection Observer)
+            const options = {
+                root: null, // следим относительно окна браузера
+                // Создаем узкую вертикальную полосу в центре экрана (-50% слева и -50% справа)
+                rootMargin: '0px -50% 0px -50%', 
+                threshold: 0
+            };
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Логотип попал в центр — делаем цветным и большим
-                entry.target.classList.add('center-logo');
-            } else {
-                // Логотип ушел из центра — возвращаем как было
-                entry.target.classList.remove('center-logo');
-            }
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Логотип попал в центр — делаем цветным и большим
+                        entry.target.classList.add('center-logo');
+                    } else {
+                        // Логотип ушел из центра — возвращаем как было
+                        entry.target.classList.remove('center-logo');
+                    }
+                });
+            }, options);
+
+            // Находим все логотипы и вешаем на них наш "радар"
+            const logos = document.querySelectorAll('.logo-slide');
+            logos.forEach(logo => observer.observe(logo));
         });
-    }, options);
-
-    // Находим все логотипы и вешаем на них наш "радар"
-    const logos = document.querySelectorAll('.logo-slide');
-    logos.forEach(logo => observer.observe(logo));
-});
     </script>
 
 </body>
