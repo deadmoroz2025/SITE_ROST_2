@@ -207,10 +207,7 @@
         .logos-slider::before, .logos-slider::after { content: ''; position: absolute; top: 0; width: 150px; height: 100%; z-index: 2; pointer-events: none; }
         .logos-slider::before { left: 0; background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); }
         .logos-slider::after { right: 0; background: linear-gradient(to left, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); }
-        /* Основной контейнер-дорожка */
-        .logos-track { display: flex; align-items: center; gap: 40px; width: max-content; animation: scrollLogos 40s linear infinite; }
-        
-        /* Группа из 8 логотипов */
+        .logos-track { display: flex; align-items: center; gap: 40px; width: max-content; animation: scrollLogos 25s linear infinite; }
         .logo-group { display: flex; align-items: center; gap: 40px; }
 
         @keyframes scrollLogos { 
@@ -223,17 +220,24 @@
             .logo-slide:hover img { filter: grayscale(0%) opacity(100%); transform: scale(1.05); }
         }
         
-        /* Сам слайд теперь без padding */
         .logo-slide { width: 160px; height: 90px; display: flex; justify-content: center; align-items: center; }
         .logo-slide img { max-width: 100%; max-height: 60px; filter: grayscale(100%) opacity(40%); transition: var(--transition); cursor: pointer; }
-		/* Стили для логотипа, когда он попадает в центр экрана */
-		.logo-slide.center-logo img {filter: grayscale(0%) opacity(100%); transform: scale(1.15); /* Увеличиваем на 15% */ }
+		.logo-slide.center-logo img {filter: grayscale(0%) opacity(100%); transform: scale(1.15); }
         
 
         .section { padding: 100px 8%; }
         .section-header { text-align: center; margin-bottom: 70px; }
         .section-header h2 { font-size: 42px; margin-bottom: 20px; }
         .section-header p { font-size: 20px; color: var(--text-muted); }
+
+        /* ЦЕНТРИРОВАННЫЙ ЗАГОЛОВОК С КНОПКОЙ СПРАВА */
+        .section-header-relative { position: relative; text-align: center; margin-bottom: 50px; }
+        .section-header-relative h2 { font-size: 42px; margin-bottom: 15px; color: var(--text-dark); }
+        .section-header-relative p { font-size: 20px; color: var(--text-muted); margin-bottom: 0; }
+        .btn-news-right { 
+            position: absolute; right: 0; bottom: 0; 
+            padding: 15px 35px; font-size: 16px; border-radius: 50px; white-space: nowrap; 
+        }
 
         .why-us-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         .why-us-card { padding: 40px; background: var(--white); border-radius: 30px; border: 1px solid #eee; transition: var(--transition); display: flex; flex-direction: column; align-items: flex-start; }
@@ -281,7 +285,6 @@
         .product-card { border-radius: 35px; overflow: hidden; background: #fff; border: 1px solid #eee; transition: var(--transition); display: flex; flex-direction: column; cursor: pointer; }
         .product-img { height: 320px; background: #eef2f0; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
         .product-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
-        .img-placeholder { position: absolute; color: var(--text-muted); font-size: 15px; font-weight: 600; text-align: center; padding: 25px; z-index: 1; }
         .product-info { padding: 35px; transition: var(--transition); display: flex; flex-direction: column; flex-grow: 1; }
         .product-info h3 { font-size: 22px; margin-bottom: 15px; }
         .open-catalog-hint { margin-top: auto; color: var(--press-green); font-weight: 700; font-size: 14px; opacity: 0; transform: translateY(10px); transition: var(--transition); display: flex; align-items: center; gap: 5px; }
@@ -329,6 +332,58 @@
         }
         .review-source { font-weight: 800; font-size: 24px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 10px; }
         .stars { color: #FFC107; font-size: 24px; margin-bottom: 15px; letter-spacing: 2px; }
+
+        /* ГОРИЗОНТАЛЬНЫЕ КАРТОЧКИ НОВОСТЕЙ (НОВОЕ) */
+        .news-grid-horizontal { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .news-h-card {
+            display: flex;
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid #eee;
+            transition: var(--transition);
+            text-decoration: none;
+            color: inherit;
+        }
+        @media (hover: hover) and (pointer: fine) {
+            .news-h-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+                border-color: var(--press-green);
+            }
+            .news-h-card:hover .news-h-img img { transform: scale(1.05); }
+        }
+        .news-h-img {
+            flex: 0 0 190px;
+            background: #eee;
+            overflow: hidden;
+        }
+        .news-h-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .news-h-content {
+            padding: 20px; /* Уменьшили отступы, так как карточки стали уже */
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        .news-h-date {
+            font-size: 12px; color: var(--press-green); font-weight: 800; 
+            margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .news-h-title {
+            font-size: 16px; margin-bottom: 10px; line-height: 1.3; color: var(--dark-green);
+        }
+        .news-h-excerpt {
+            font-size: 14px; color: var(--text-muted); line-height: 1.4; margin-bottom: 15px; flex-grow: 1;
+        }
+        .news-h-link {
+            color: var(--press-green); font-weight: 700; font-size: 14px; 
+            display: flex; align-items: center; gap: 5px; margin-top: auto;
+        }
 
         /* ИНФОЦЕНТР */
         .info-hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
@@ -549,6 +604,7 @@
                 margin-top: 15px;
             }
             .dropdown-content a { padding: 10px 0; font-size: 18px; margin: 0; }
+            .news-grid-horizontal { grid-template-columns: 1fr; } /* Одна колонка на планшетах (перенесено сюда для плавности) */
         }
         
         @media (max-width: 900px) {
@@ -557,7 +613,7 @@
         }
         @media (max-width: 768px) {
             .logos-slider::before, .logos-slider::after { width: 50px; }
-            .logos-track { width: max-content; gap: 30px; animation: scrollLogosMobile 30s linear infinite; }
+            .logos-track { width: max-content; gap: 30px; animation: scrollLogosMobile 20s linear infinite; }
             .logo-group { gap: 30px; }
             .logo-slide { width: 120px; padding: 0; }
             @keyframes scrollLogosMobile { 
@@ -567,25 +623,28 @@
             
             .trust-title { font-size: 32px; }
             
-            .back-btn span { display: none; }
-            .tabs-header { display: none; } 
-            .mobile-accordion-btn { display: flex; } 
             .tabs-container { border-radius: 20px; padding-bottom: 10px; }
             .tab-content { padding: 25px; border-bottom: none; }
             .accordion-wrapper:last-child .mobile-accordion-btn { border-bottom: none; }
             .tab-text h3 { font-size: 24px; }
             
+            .section-header-relative { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+            .btn-news-right { position: relative; right: auto; bottom: auto; }
+            
             .overlay-gallery { grid-template-columns: 1fr; }
             .overlay-header { padding: 15px 5%; }
             .overlay-content { padding: 30px 5%; }
             
-            /* Нативный свайп для мобильных каруселей */
             .carousel-wrapper { gap: 10px; display: block; }
             .carousel-track-container { max-width: 100%; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
             .carousel-track-container::-webkit-scrollbar { display: none; }
             .carousel-track { width: max-content; }
             .carousel-card { flex: 0 0 240px; scroll-snap-align: start; min-width: 240px; }
             .carousel-btn { display: none !important; }
+
+            /* Мобильный вид горизонтальных новостей */
+            .news-h-card { flex-direction: column; }
+            .news-h-img { max-width: 100%; height: 220px; }
         }
         @media (max-width: 600px) {
             .hero-banner { min-height: 500px !important; height: calc(100dvh - 80px) !important; }
@@ -610,7 +669,6 @@
             .captcha-placeholder { flex-direction: column; gap: 15px; }
             .captcha-left { width: 100%; justify-content: center; }
             
-            /* Лайтбокс на мобильных */
             .lightbox-nav { font-size: 40px; padding: 10px; }
             .lightbox-nav.prev { left: 5px; }
             .lightbox-nav.next { right: 5px; }
@@ -664,7 +722,6 @@
     </header>
 
     <section class="hero-banner">
-            
         <div class="hero-slide active">
             <div class="slide-bg">
                 <picture>
@@ -705,7 +762,6 @@
             </div>
         </div>
 
-        <!-- ТРЕТИЙ СЛАЙД: АНОНСЫ -->
         <div class="hero-slide">
             <div class="slide-bg">
                 <picture>
@@ -805,8 +861,7 @@
             <div class="catalog-grid">
                 <div class="product-card" data-category="Алкогольная продукция" data-type="industry" data-prefix="alcohol" data-images-count="12" data-img="alcohol.webp" data-aos="fade-up" data-aos-delay="0">
                     <div class="product-img">
-                        <div class="img-placeholder" style="display: none;">alcohol.webp</div>
-                        <img src="alcohol.webp" alt="Этикетка для алкоголя" loading="lazy" onerror="this.previousElementSibling.style.display='block'; this.style.display='none';">
+                        <img src="alcohol.webp" alt="Этикетка для алкоголя" loading="lazy" onerror="this.style.display='none';">
                     </div>
                     <div class="product-info">
                         <h3>Этикетки для алкогольной продукции</h3>
@@ -814,10 +869,9 @@
                         <div class="open-catalog-hint">Открыть каталог →</div>
                     </div>
                 </div>
-                <div class="product-card" data-category="Косметика и парфюмерия" data-type="industry" data-prefix="cosmetics" data-img="cosmetics.webp" data-aos="fade-up" data-aos-delay="100">
+                <div class="product-card" data-category="Косметика и парфюмерия" data-type="industry" data-prefix="cosmetics" data-images-count="12" data-img="cosmetics.webp" data-aos="fade-up" data-aos-delay="100">
                     <div class="product-img">
-                        <div class="img-placeholder" style="display: none;">cosmetics.webp</div>
-                        <img src="cosmetics.webp" alt="Этикетка для косметики" loading="lazy" onerror="this.previousElementSibling.style.display='block'; this.style.display='none';">
+                        <img src="cosmetics.webp" alt="Этикетка для косметики" loading="lazy" onerror="this.style.display='none';">
                     </div>
                     <div class="product-info">
                         <h3>Этикетки для косметики и парфюмерии</h3>
@@ -825,10 +879,9 @@
                         <div class="open-catalog-hint">Открыть каталог →</div>
                     </div>
                 </div>
-                <div class="product-card" data-category="Пищевая продукция" data-type="industry" data-prefix="food" data-img="food.webp" data-aos="fade-up" data-aos-delay="200">
+                <div class="product-card" data-category="Пищевая продукция" data-type="industry" data-prefix="food" data-images-count="12" data-img="food.webp" data-aos="fade-up" data-aos-delay="200">
                     <div class="product-img">
-                        <div class="img-placeholder" style="display: none;">food.webp</div>
-                        <img src="food.webp" alt="Этикетка для пищепрома" loading="lazy" onerror="this.previousElementSibling.style.display='block'; this.style.display='none';">
+                        <img src="food.webp" alt="Этикетка для пищепрома" loading="lazy" onerror="this.style.display='none';">
                     </div>
                     <div class="product-info">
                         <h3>Этикетки для пищевой продукции</h3>
@@ -836,10 +889,9 @@
                         <div class="open-catalog-hint">Открыть каталог →</div>
                     </div>
                 </div>
-                <div class="product-card" data-category="Автохимия" data-type="industry" data-prefix="autochem" data-img="autochem.webp" data-aos="fade-up" data-aos-delay="0">
+                <div class="product-card" data-category="Автохимия" data-type="industry" data-prefix="autochem" data-images-count="12" data-img="autochem.webp" data-aos="fade-up" data-aos-delay="0">
                     <div class="product-img">
-                        <div class="img-placeholder" style="display: none;">autochem.webp</div>
-                        <img src="autochem.webp" alt="Этикетка для автохимии" loading="lazy" onerror="this.previousElementSibling.style.display='block'; this.style.display='none';">
+                        <img src="autochem.webp" alt="Этикетка для автохимии" loading="lazy" onerror="this.style.display='none';">
                     </div>
                     <div class="product-info">
                         <h3>Этикетки для автохимии</h3>
@@ -847,10 +899,9 @@
                         <div class="open-catalog-hint">Открыть каталог →</div>
                     </div>
                 </div>
-                <div class="product-card" data-category="Термоусадочная этикетка" data-type="industry" data-prefix="shrink" data-img="shrink.webp" data-aos="fade-up" data-aos-delay="100">
+                <div class="product-card" data-category="Термоусадочная этикетка" data-type="industry" data-prefix="shrink" data-images-count="12" data-img="shrink.webp" data-aos="fade-up" data-aos-delay="100">
                     <div class="product-img">
-                        <div class="img-placeholder" style="display: none;">shrink.webp</div>
-                        <img src="shrink.webp" alt="Термоусадочная label" loading="lazy" onerror="this.previousElementSibling.style.display='block'; this.style.display='none';">
+                        <img src="shrink.webp" alt="Термоусадочная label" loading="lazy" onerror="this.style.display='none';">
                     </div>
                     <div class="product-info">
                         <h3>Термоусадочная этикетка</h3>
@@ -858,10 +909,9 @@
                         <div class="open-catalog-hint">Открыть каталог →</div>
                     </div>
                 </div>
-                <div class="product-card" data-category="Бытовая химия" data-type="industry" data-prefix="household" data-img="household.webp" data-aos="fade-up" data-aos-delay="200">
+                <div class="product-card" data-category="Бытовая химия" data-type="industry" data-prefix="household" data-images-count="12" data-img="household.webp" data-aos="fade-up" data-aos-delay="200">
                     <div class="product-img">
-                        <div class="img-placeholder" style="display: none;">Бытовая химия</div>
-                        <img src="household.webp" alt="Этикетка для бытовой химии" loading="lazy" onerror="this.previousElementSibling.style.display='block'; this.style.display='none';">
+                        <img src="household.webp" alt="Этикетка для бытовой химии" loading="lazy" onerror="this.style.display='none';">
                     </div>
                     <div class="product-info">
                         <h3>Этикетки для бытовой химии</h3>
@@ -874,10 +924,9 @@
 
         <div id="tab-products" class="product-tab-content">
             <div class="catalog-grid">
-                <div class="product-card" data-category="Самоклеящиеся этикетки" data-type="product" data-prefix="self_adhesive" data-aos="fade-up" data-aos-delay="0">
+                <div class="product-card" data-category="Самоклеящиеся этикетки" data-type="product" data-prefix="self_adhesive" data-images-count="12" data-aos="fade-up" data-aos-delay="0">
                     <div class="product-img">
-                        <div class="img-placeholder" style="display: none;">self_adhesive.webp</div>
-                        <img src="self_adhesive.webp" alt="Самоклеящиеся этикетки" loading="lazy" onerror="this.previousElementSibling.style.display='block'; this.style.display='none';">
+                        <img src="self_adhesive.webp" alt="Самоклеящиеся этикетки" loading="lazy" onerror="this.style.display='none';">
                     </div>
                     <div class="product-info">
                         <h3>Самоклеящиеся этикетки</h3>
@@ -885,10 +934,9 @@
                         <div class="open-catalog-hint">Открыть каталог →</div>
                     </div>
                 </div>
-                <div class="product-card" data-category="Термоусадочные этикетки" data-type="product" data-prefix="shrink_labels" data-aos="fade-up" data-aos-delay="100">
+                <div class="product-card" data-category="Термоусадочные этикетки" data-type="product" data-prefix="shrink_labels" data-images-count="12" data-aos="fade-up" data-aos-delay="100">
                     <div class="product-img">
-                        <div class="img-placeholder" style="display: none;">shrink_labels.webp</div>
-                        <img src="shrink_labels.webp" alt="Термоусадочные этикетки" loading="lazy" onerror="this.previousElementSibling.style.display='block'; this.style.display='none';">
+                        <img src="shrink_labels.webp" alt="Термоусадочные этикетки" loading="lazy" onerror="this.style.display='none';">
                     </div>
                     <div class="product-info">
                         <h3>Термоусадочные этикетки</h3>
@@ -896,10 +944,9 @@
                         <div class="open-catalog-hint">Открыть каталог →</div>
                     </div>
                 </div>
-                <div class="product-card" data-category="Цифровая этикетка" data-type="product" data-prefix="digital_labels" data-aos="fade-up" data-aos-delay="200">
+                <div class="product-card" data-category="Цифровая этикетка" data-type="product" data-prefix="digital_labels" data-images-count="12" data-aos="fade-up" data-aos-delay="200">
                     <div class="product-img">
-                        <div class="img-placeholder" style="display: none;">digital_labels.webp</div>
-                        <img src="digital_labels.webp" alt="Цифровая этикетка" loading="lazy" onerror="this.previousElementSibling.style.display='block'; this.style.display='none';">
+                        <img src="digital_labels.webp" alt="Цифровая этикетка" loading="lazy" onerror="this.style.display='none';">
                     </div>
                     <div class="product-info">
                         <h3>Цифровая этикетка</h3>
@@ -907,10 +954,9 @@
                         <div class="open-catalog-hint">Открыть каталог →</div>
                     </div>
                 </div>
-                <div class="product-card" data-category="Честный Знак" data-type="product" data-prefix="chestny_znak" data-aos="fade-up" data-aos-delay="0">
+                <div class="product-card" data-category="Честный Знак" data-type="product" data-prefix="chestny_znak" data-images-count="12" data-aos="fade-up" data-aos-delay="0">
                     <div class="product-img">
-                        <div class="img-placeholder" style="display: none;">chestny_znak.webp</div>
-                        <img src="chestny_znak.webp" alt="Честный Знак" loading="lazy" onerror="this.previousElementSibling.style.display='block'; this.style.display='none';">
+                        <img src="chestny_znak.webp" alt="Честный Знак" loading="lazy" onerror="this.style.display='none';">
                     </div>
                     <div class="product-info">
                         <h3>Честный Знак</h3>
@@ -918,10 +964,9 @@
                         <div class="open-catalog-hint">Открыть каталог →</div>
                     </div>
                 </div>
-                <div class="product-card" data-category="Трафаретная печать" data-type="product" data-prefix="screen_printing" data-aos="fade-up" data-aos-delay="100">
+                <div class="product-card" data-category="Трафаретная печать" data-type="product" data-prefix="screen_printing" data-images-count="12" data-aos="fade-up" data-aos-delay="100">
                     <div class="product-img">
-                        <div class="img-placeholder" style="display: none;">screen_printing.webp</div>
-                        <img src="screen_printing.webp" alt="Трафаретная печать" loading="lazy" onerror="this.previousElementSibling.style.display='block'; this.style.display='none';">
+                        <img src="screen_printing.webp" alt="Трафаретная печать" loading="lazy" onerror="this.style.display='none';">
                     </div>
                     <div class="product-info">
                         <h3>Трафаретная печать</h3>
@@ -929,10 +974,9 @@
                         <div class="open-catalog-hint">Открыть каталог →</div>
                     </div>
                 </div>
-                <div class="product-card" data-category="Цифровой трафарет и тиснение" data-type="product" data-prefix="digital_embossing" data-aos="fade-up" data-aos-delay="200">
+                <div class="product-card" data-category="Цифровой трафарет и тиснение" data-type="product" data-prefix="digital_embossing" data-images-count="12" data-aos="fade-up" data-aos-delay="200">
                     <div class="product-img">
-                        <div class="img-placeholder" style="display: none;">digital_embossing.webp</div>
-                        <img src="digital_embossing.webp" alt="Цифровой трафарет и тиснение" loading="lazy" onerror="this.previousElementSibling.style.display='block'; this.style.display='none';">
+                        <img src="digital_embossing.webp" alt="Цифровой трафарет и тиснение" loading="lazy" onerror="this.style.display='none';">
                     </div>
                     <div class="product-info">
                         <h3>Цифровой трафарет и тиснение</h3>
@@ -940,11 +984,9 @@
                         <div class="open-catalog-hint">Открыть каталог →</div>
                     </div>
                 </div>
-                <!-- НОВАЯ КАРТОЧКА БОПП -->
-                <div class="product-card" data-category="БОПП" data-type="product" data-prefix="bopp" data-images-count="5" data-aos="fade-up" data-aos-delay="300">
+                <div class="product-card" data-category="БОПП" data-type="product" data-prefix="bopp" data-images-count="12" data-aos="fade-up" data-aos-delay="300">
                     <div class="product-img">
-                        <div class="img-placeholder" style="display: none;">bopp.webp</div>
-                        <img src="bopp.webp" alt="БОПП этикетки" loading="lazy" onerror="this.previousElementSibling.style.display='block'; this.style.display='none';">
+                        <img src="bopp.webp" alt="БОПП этикетки" loading="lazy" onerror="this.style.display='none';">
                     </div>
                     <div class="product-info">
                         <h3>БОПП этикетки</h3>
@@ -1202,24 +1244,33 @@
         </div>
     </section>
 
-    <section id="info-hub" class="section">
+    <!-- СЕКЦИЯ НОВОСТЕЙ (ДОБАВЛЕНА НОВАЯ) -->
+    <section id="latest-news" class="section">
+        <div class="section-header-relative" data-aos="fade-up">
+            <h2>События типографии</h2>
+            <p>Последние новости, анонсы и выставки</p>
+            <a href="news.html" class="btn btn-outline-hero btn-news-right">Все новости</a>
+        </div>
+        
+        <div id="latest-news-grid" class="news-grid-horizontal">
+            <!-- Сюда скрипт динамически вставит горизонтальные карточки новостей -->
+        </div>
+    </section>
+
+    <!-- ИНФОЦЕНТР (Удалена карточка новостей, осталось две) -->
+    <section id="info-hub" class="section" style="padding-top: 0;">
         <div class="section-header" data-aos="fade-up">
             <h2>Инфоцентр</h2>
             <p>Полезная информация для партнеров и клиентов</p>
         </div>
         <div class="info-hub-grid">
-            <a href="news.html" class="info-card" data-aos="fade-up" data-aos-delay="0">
-                <h3>Новости компании</h3>
-                <p>Участие в выставках, запуск нового оборудования и важные события из жизни типографии.</p>
-                <div class="info-icon">📰</div>
-            </a>
-            <a href="sout.html" class="info-card" data-aos="fade-up" data-aos-delay="100">
+            <!-- Карточка новостей удалена отсюда -->
+            <a href="sout.html" class="info-card" data-aos="fade-up" data-aos-delay="0">
                 <h3>СОУТ</h3>
                 <p>Сводные данные о результатах проведения специальной оценки условий труда на рабочих местах нашего производства.</p>
                 <div class="info-icon">📋</div>
             </a>
-            <!-- ИЗМЕНЕНА ССЫЛКА НА ARTICLES.HTML -->
-            <a href="articles.html" class="info-card" data-aos="fade-up" data-aos-delay="200">
+            <a href="articles.html" class="info-card" data-aos="fade-up" data-aos-delay="100">
                 <h3>Полезные статьи</h3>
                 <p>Гид по выбору материалов, виды отделки и советы по созданию продающей этикетки.</p>
                 <div class="info-icon">💡</div>
@@ -1274,7 +1325,7 @@
         </div>
     </footer>
 
-    <!-- ДОБАВЛЕНЫ КНОПКИ ДЛЯ СВАЙПЕРА КАРТИНОК В ЛАЙТБОКСЕ -->
+    <!-- МОДАЛКИ (Без изменений) -->
     <div id="imageModal" class="modal">
         <span class="close-btn" id="closeImgModal">&times;</span>
         <span class="lightbox-nav prev" id="prevImgBtn">‹</span>
@@ -1346,14 +1397,12 @@
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="news-data.js"></script> <!-- Подключаем базу для главной страницы -->
+    
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             if (typeof AOS !== 'undefined') {
                 AOS.init({ duration: 800, once: true, offset: 50 });
-            } else {
-                document.querySelectorAll('[data-aos]').forEach(function(el) {
-                    el.style.opacity = '1'; el.style.transform = 'none';
-                });
             }
 
             if (window.innerWidth <= 768) {
@@ -1365,6 +1414,36 @@
                     flexoContent.classList.remove('active');
                     flexoContent.style.display = 'none';
                 }
+            }
+
+            // --- РЕНДЕР ГОРИЗОНТАЛЬНЫХ НОВОСТЕЙ ---
+            const newsContainer = document.getElementById('latest-news-grid');
+            if (newsContainer && typeof newsData !== 'undefined') {
+                // Берем ровно 3 новости, чтобы они выстроились в один ровный ряд 
+                const latestPosts = newsData.slice(0, 3); 
+                let html = '';
+                
+                latestPosts.forEach((post, index) => {
+                    const delay = index * 100;
+                    html += `
+                        <a href="news.html?id=${post.id}" class="news-h-card" data-aos="fade-up" data-aos-delay="${delay}">
+                            <div class="news-h-img">
+                                <img src="${post.image}" alt="${post.title}" onerror="this.src='https://via.placeholder.com/600x400/eef2f0/2d8a4e?text=Фото'">
+                            </div>
+                            <div class="news-h-content">
+                                <div class="news-h-date">${post.date}</div>
+                                <h3 class="news-h-title">${post.title}</h3>
+                                <p class="news-h-excerpt">${post.excerpt.substring(0, 85)}...</p>
+                                <div class="news-h-link">
+                                    Читать далее <span style="font-size: 18px;">→</span>
+                                </div>
+                            </div>
+                        </a>
+                    `;
+                });
+                newsContainer.innerHTML = html;
+            } else if (newsContainer) {
+                newsContainer.innerHTML = '<p>Новости загружаются...</p>';
             }
         });
 
@@ -1410,12 +1489,13 @@
         
         let currentLightboxImages = [];
         let currentLightboxIndex = 0;
+        let swipeDirection = 1;
 
-        // Открытие полноэкранного просмотра. Поддерживает как массив картинок, так и одну картинку.
         window.openLightbox = function(srcOrIndex, imagesArray = null) {
             burgerMenuBtn.classList.remove('active');
             mobileNavMenu.classList.remove('active');
             modal.style.display = "block";
+            swipeDirection = 1; 
             
             if (Array.isArray(imagesArray)) {
                 currentLightboxImages = imagesArray;
@@ -1438,25 +1518,42 @@
 
         function nextLightboxImg() {
             if (currentLightboxImages.length <= 1) return;
+            swipeDirection = 1;
             currentLightboxIndex = (currentLightboxIndex + 1) % currentLightboxImages.length;
             updateLightboxImage();
         }
 
         function prevLightboxImg() {
             if (currentLightboxImages.length <= 1) return;
+            swipeDirection = -1;
             currentLightboxIndex = (currentLightboxIndex - 1 + currentLightboxImages.length) % currentLightboxImages.length;
             updateLightboxImage();
         }
 
+        modalImg.onerror = function() {
+            if (currentLightboxImages.length > 1) {
+                currentLightboxImages.splice(currentLightboxIndex, 1);
+                if (swipeDirection === 1) {
+                    if (currentLightboxIndex >= currentLightboxImages.length) {
+                        currentLightboxIndex = 0; 
+                    }
+                } else {
+                    currentLightboxIndex = (currentLightboxIndex - 1 + currentLightboxImages.length) % currentLightboxImages.length;
+                }
+                updateLightboxImage(); 
+            } else {
+                modal.style.display = "none";
+            }
+        };
+
         document.getElementById('nextImgBtn').onclick = nextLightboxImg;
         document.getElementById('prevImgBtn').onclick = prevLightboxImg;
 
-        // Инициализация одиночных картинок (например для datamatrix)
         const images = document.querySelectorAll(".zoomable");
         images.forEach(img => {
             img.onclick = function(e) {
                 if (this.closest('.product-card')) return;
-                openLightbox(this.src); // Одиночный режим
+                openLightbox(this.src); 
             }
         });
 
@@ -1536,12 +1633,12 @@
             type: c.getAttribute('data-type'), 
             img: c.querySelector('img').src, 
             prefix: c.getAttribute('data-prefix'),
-            imagesCount: parseInt(c.getAttribute('data-images-count')) || 8
+            imagesCount: parseInt(c.getAttribute('data-images-count')) || 12
         }));
         
-        let currentCategoryIndex = -1; // Для свайпов по оверлею
+        let currentCategoryIndex = -1; 
 
-        function openCategory(categoryName, type, prefix, imagesCount = 8) {
+        function openCategory(categoryName, type, prefix, imagesCount = 12) {
             burgerMenuBtn.classList.remove('active');
             mobileNavMenu.classList.remove('active');
             
@@ -1551,12 +1648,8 @@
             overlayDesc.innerHTML = categoryDescriptions[categoryName] || "Профессиональная печать этикеток высшего качества.";
             overlayGrid.innerHTML = '';
 
-            let catImages = [];
-
             for (let i = 1; i <= imagesCount; i++) {
-                const imgSrc = prefix ? `${prefix}_${i}.webp` : `https://via.placeholder.com/800x600/eee/999?text=Пример+${i}`;
-                catImages.push(imgSrc);
-
+                const imgSrc = `${prefix}_${i}.webp`;
                 const item = document.createElement('div');
                 item.className = 'gallery-item';
                 
@@ -1565,10 +1658,14 @@
                 img.alt = `${categoryName} пример ${i}`;
                 img.loading = 'lazy'; 
                 
-                img.onerror = function() { item.style.display = 'none'; };
+                img.onerror = function() { item.remove(); };
                 
-                // Передаем индекс в функцию лайтбокса
-                item.onclick = (function(idx) { return function() { openLightbox(idx, catImages); } })(i - 1);
+                item.onclick = function() {
+                    const validImages = Array.from(overlayGrid.querySelectorAll('img')).map(imgEl => imgEl.getAttribute('src'));
+                    let currentIndex = validImages.indexOf(imgSrc);
+                    if (currentIndex === -1) currentIndex = 0;
+                    openLightbox(currentIndex, validImages);
+                };
 
                 const caption = document.createElement('div');
                 caption.className = 'gallery-caption';
@@ -1596,7 +1693,7 @@
             items.forEach(item => {
                 const card = document.createElement('div');
                 card.className = 'carousel-card';
-                card.innerHTML = `<img src="${item.img}" onerror="this.src='https://via.placeholder.com/400x300/eee/999'"><div class="carousel-card-info"><h4>${item.cat}</h4><span>Узнать больше →</span></div>`;
+                card.innerHTML = `<img src="${item.img}" onerror="this.closest('.carousel-card').remove();"><div class="carousel-card-info"><h4>${item.cat}</h4><span>Узнать больше →</span></div>`;
                 card.onclick = () => openCategory(item.cat, item.type, item.prefix, item.imagesCount);
                 track.appendChild(card);
             });
@@ -1631,7 +1728,7 @@
                 const category = this.getAttribute('data-category');
                 const type = this.getAttribute('data-type');
                 const prefix = this.getAttribute('data-prefix'); 
-                const imagesCount = parseInt(this.getAttribute('data-images-count')) || 8;
+                const imagesCount = parseInt(this.getAttribute('data-images-count')) || 12;
                 if (category && prefix) { openCategory(category, type, prefix, imagesCount); }
             });
         });
@@ -1640,7 +1737,6 @@
         overlayCloseBtn.onclick = closeCategory;
         overlayCloseBottomBtn.onclick = closeCategory;
 
-        // --- УНИВЕРСАЛЬНЫЙ ОБРАБОТЧИК СВАЙПОВ ---
         function handleSwipe(element, onSwipeLeft, onSwipeRight, ignoreClass) {
             let touchstartX = 0;
             let touchendX = 0;
@@ -1653,7 +1749,6 @@
             }, {passive: true});
 
             element.addEventListener('touchend', e => {
-                // Если указан класс исключения, и свайп был внутри него, игнорируем
                 if (ignoreClass && e.target.closest('.' + ignoreClass)) return; 
                 
                 touchendX = e.changedTouches[0].screenX;
@@ -1665,18 +1760,15 @@
                 const diffX = touchendX - touchstartX;
                 const diffY = touchendY - touchstartY;
                 
-                // Проверяем, что свайп был горизонтальным (по X больше чем по Y) и достаточно длинным (более 50px)
                 if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
-                    if (diffX < 0) onSwipeLeft(); // Свайп влево
-                    if (diffX > 0) onSwipeRight(); // Свайп вправо
+                    if (diffX < 0) onSwipeLeft(); 
+                    if (diffX > 0) onSwipeRight(); 
                 }
             }
         }
 
-        // Подключаем свайп для Лайтбокса
         handleSwipe(document.getElementById('imageModal'), nextLightboxImg, prevLightboxImg);
 
-        // Функции для переключения целой категории
         function nextCategory() {
             if (currentCategoryIndex < 0) return;
             let nextIdx = (currentCategoryIndex + 1) % catalogData.length;
@@ -1691,10 +1783,8 @@
             openCategory(prevCat.cat, prevCat.type, prevCat.prefix, prevCat.imagesCount);
         }
 
-        // Подключаем свайп для Оверлея категории (игнорируя нижнюю карусель)
         handleSwipe(document.querySelector('.overlay-content'), nextCategory, prevCategory, 'carousel-track-container');
 
-        // Клавиатура (ESC и Стрелочки)
         document.addEventListener('keydown', function(event) {
             if (event.key === "Escape") {
                 if (modal.style.display === "block") { modal.style.display = "none"; } 
@@ -1783,7 +1873,6 @@
             });
         }
 
-        // ОБНОВЛЕННЫЙ СЛАЙДЕР HERO
         function initCustomHeroSlider() {
             const slides = document.querySelectorAll('.hero-slide');
             if (slides.length === 0) return;
@@ -1825,10 +1914,8 @@
         window.onload = initCustomHeroSlider;
 		
 		document.addEventListener("DOMContentLoaded", function() {
-            // Настройки "радара" (Intersection Observer)
             const options = {
-                root: null, // следим относительно окна браузера
-                // Создаем узкую вертикальную полосу в центре экрана (-50% слева и -50% справа)
+                root: null, 
                 rootMargin: '0px -50% 0px -50%', 
                 threshold: 0
             };
@@ -1836,16 +1923,13 @@
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        // Логотип попал в центр — делаем цветным и большим
                         entry.target.classList.add('center-logo');
                     } else {
-                        // Логотип ушел из центра — возвращаем как было
                         entry.target.classList.remove('center-logo');
                     }
                 });
             }, options);
 
-            // Находим все логотипы и вешаем на них наш "радар"
             const logos = document.querySelectorAll('.logo-slide');
             logos.forEach(logo => observer.observe(logo));
         });

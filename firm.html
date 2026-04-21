@@ -495,6 +495,14 @@
                         <div class="timeline-text">Приобретение оборудования азиатского производства: LabStar330, Hanlabel Digital Ultra 330S.</div>
                     </div>
                 </div>
+
+                <div class="timeline-item" data-aos="fade-down" data-aos-delay="700">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year" style="font-size: 22px;">2025-Наши дни</div>
+                        <div class="timeline-text">ООО «Типография РОСТ» — динамично развивающаяся компания с широким парком оборудования.</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -818,23 +826,15 @@
 
             updateContent();
             currentAngleOffset = targetAngleOffset;
-            animate();
-// ... (здесь ваш старый код функции)
-            titleEl.style.transition = 'opacity 0.2s ease';
-            descEl.style.transition = 'opacity 0.2s ease';
-
-            updateContent();
-            currentAngleOffset = targetAngleOffset;
             animate(); 
 
-            // === НОВЫЙ КОД: АВТОМАТИЧЕСКАЯ ПРОКРУТКА ===
+            // === АВТОМАТИЧЕСКАЯ ПРОКРУТКА ===
             let autoPlayInterval;
-            const autoPlayDelay = 4000; // 4000 мс = 4 секунды (можете изменить скорость)
+            const autoPlayDelay = 4000;
 
             function startAutoPlay() {
                 clearInterval(autoPlayInterval);
                 autoPlayInterval = setInterval(() => {
-                    // Имитируем нажатие кнопки "вперед"
                     document.getElementById('nextStepBtn').click();
                 }, autoPlayDelay);
             }
@@ -843,14 +843,13 @@
                 clearInterval(autoPlayInterval);
             }
 
-            // Останавливаем орбиту, если пользователь навел мышку (читает или кликает сам)
             const wrapper = document.querySelector('.process-interactive-wrapper');
-            wrapper.addEventListener('mouseenter', stopAutoPlay);
-            wrapper.addEventListener('mouseleave', startAutoPlay);
+            if(wrapper) {
+                wrapper.addEventListener('mouseenter', stopAutoPlay);
+                wrapper.addEventListener('mouseleave', startAutoPlay);
+            }
 
-            // Запускаем при загрузке
             startAutoPlay();
-            // === КОНЕЦ НОВОГО КОДА ===			
         }
 
         const aboutBtn = document.getElementById('aboutBtn');

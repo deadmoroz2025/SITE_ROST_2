@@ -474,6 +474,14 @@
         document.addEventListener("DOMContentLoaded", function() {
             if (typeof AOS !== 'undefined') { AOS.init({ duration: 800, once: true, offset: 50 }); }
             renderNews();
+            
+            // Проверяем, есть ли ID новости в URL, чтобы сразу её открыть
+            const urlParams = new URLSearchParams(window.location.search);
+            const newsId = urlParams.get('id');
+            if (newsId) {
+                // Открываем модалку с небольшой задержкой для плавности анимации
+                setTimeout(() => openNews(parseInt(newsId)), 200);
+            }
         });
 
         // ОБНОВЛЕННЫЕ СКРИПТЫ МЕНЮ И ШАПКИ
