@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Печать этикеток для пищевой продукции | Типография ПрессРост</title>
+    <meta name="description" content="Изготовление самоклеящихся этикеток для продуктов питания. Безопасные краски низкой миграции, морозостойкие клеи, жиростойкость.">
+    <link rel="canonical" href="https://pressrost.ru/food-labels.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://pressrost.ru/food-labels.html">
+    <meta property="og:title" content="Этикетки для пищевой продукции | ПрессРост">
+    <meta property="og:description" content="Защита от жира, влаги и отклеивания в морозилке. Полное соответствие пищевым ГОСТам.">
+    <meta property="og:image" content="https://pressrost.ru/img/food.webp">
+
+    <!-- Schema.org (Микроразметка Услуги) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Печать этикеток для пищевой продукции",
+      "provider": {
+        "@type": "Organization",
+        "name": "Типография РОСТ",
+        "sameAs": "https://pressrost.ru/"
+      },
+      "description": "Изготовление самоклеящихся этикеток для мяса, рыбы, полуфабрикатов и консервов. Использование морозостойких клеев и жиростойких пленок."
+    }
+    </script>
+
+    <!-- Schema.org (Микроразметка FAQ) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "Отклеится ли этикетка в морозильной камере?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Нет. Для замороженных полуфабрикатов и мороженого мы используем специальные морозостойкие клеи (Hot-melt), которые сохраняют адгезию при температуре до -40°C."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Безопасна ли ваша печать для продуктов питания?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Абсолютно. Мы применяем специальные УФ-краски низкой миграции (Low Migration), которые официально допущены к печати упаковки с непрямым контактом с пищей."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Выцветает ли этикетка на солнце или при нагреве в СВЧ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "При правильном подборе материалов (например, полипропилен со спец-лаком) этикетка выдержит как охлаждение, так и нагрев в микроволновой печи без потери цвета."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Печатаете ли вы коды маркировки Честный ЗНАК для молочной продукции?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Да, у нас огромный опыт интеграции кодов Data Matrix для молочной индустрии, бутилированной воды и консервов с гарантией 100% считываемости."
+        }
+      }]
+    }
+    </script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Базовые и специфичные стили -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/food-labels.css">
+
+    <!-- ПОДКЛЮЧАЕМ НАШИ ВЕБ-КОМПОНЕНТЫ -->
+    <script src="js/header.js"></script>
+    <script src="js/footer.js"></script>
+</head>
+<body>
+
+    <!-- ВЫЗОВ ШАПКИ САЙТА ИЗ КОМПОНЕНТА -->
+    <site-header></site-header>
+
+    <main>
+        <!-- Hero Секция -->
+        <section class="hero-banner">
+            <div class="hero-slide active">
+                <div class="slide-bg">
+                    <img src="img/food_bg.webp" alt="Этикетки для пищевой продукции" onerror="this.src='img/food.webp'">
+                </div>
+                
+                <div class="slide-container">
+                    <div class="slide-text">
+                        <span class="slide-label">Решения для отрасли</span>
+                        <h1 class="hero-title">Печать этикеток для пищевой продукции</h1>
+                        <p>Безопасность и безупречный вид ваших продуктов на полке. Краски низкой миграции, морозостойкие клеи и материалы, устойчивые к жирам. <strong>Срок изготовления — от 3 дней.</strong></p>
+                        <div class="slide-buttons">
+                            <button class="btn btn-primary btn-order trigger-modal" id="heroOrderBtn">Получить расчет</button>
+                            <a href="index.html?catalog=food" class="btn btn-outline-hero">Перейти в каталог</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- БЛОК ПРЕИМУЩЕСТВ (Отраслевые фишки) -->
+        <section class="section" style="position: relative; overflow: hidden; background: transparent;">
+            <div class="food-ecosystem-wrapper">
+                
+                <div class="food-header-block" data-aos="fade-up">
+                    <img src="img/bg-rolls-food.webp" alt="Рулоны пищевых этикеток" class="food-bg-rolls" loading="lazy" onerror="this.style.display='none'">
+                    <h2>Надежность в любых условиях</h2>
+                    <p>Технологии, гарантирующие сохранность упаковки</p>
+                </div>
+
+                <div class="food-flow">
+                    <div class="food-card" data-aos="fade-up" data-aos-delay="0">
+                        <div class="food-card-icon-wrap">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22A10 10 0 0 1 12 2c5.523 0 10 4.477 10 10a10 10 0 0 1-10 10zM12 2v20"/></svg>
+                        </div>
+                        <h3>Экологичность</h3>
+                        <p>Используем безопасные Low Migration краски, допущенные к непрямому контакту с пищей.</p>
+                    </div>
+
+                    <div class="food-arrow-wrapper">
+                        <svg class="food-chevron" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    </div>
+
+                    <div class="food-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="food-card-icon-wrap">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M4.93 4.93l14.14 14.14"/><path d="M19.07 4.93L4.93 19.07"/></svg>
+                        </div>
+                        <h3>Морозостойкость</h3>
+                        <p>Специализированные клеи (Hot-melt), предотвращающие отклеивание в камерах глубокой заморозки.</p>
+                    </div>
+
+                    <div class="food-arrow-wrapper">
+                        <svg class="food-chevron" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    </div>
+
+                    <div class="food-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="food-card-icon-wrap">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+                        </div>
+                        <h3>Жиростойкость</h3>
+                        <p>Полимерные пленки и барьерные лаки защищают дизайн от размокания и масляных пятен.</p>
+                    </div>
+
+                    <div class="food-arrow-wrapper">
+                        <svg class="food-chevron" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    </div>
+
+                    <div class="food-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="food-card-icon-wrap">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        </div>
+                        <h3>Защитные пломбы</h3>
+                        <p>Этикетки-замки (контроль первого вскрытия) для контейнеров, лотков и кулинарии.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ТРЕБОВАНИЯ И МАТЕРИАЛЫ (SPLIT-BLOCK) С ЗАГЛУШКОЙ -->
+        <section class="section" id="materials">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Возможности производства</h2>
+                <p>Соответствуем строгим стандартам качества и безопасности</p>
+            </div>
+            
+            <div class="split-block" data-aos="fade-up" data-aos-delay="100">
+                <div class="split-content">
+                    <h3 style="font-size: 26px; color: var(--dark-green); margin-bottom: 20px;">Особенности для пищепрома:</h3>
+                    <p style="font-size: 18px; color: var(--text-muted); line-height: 1.6;">Специфика пищевой этикетки — это сложная логистика: от обледенения в холодильниках до нагрева в СВЧ печах.</p>
+                    <ul>
+                        <li><strong>Устойчивость к конденсату:</strong> При перемещении из холодильника в тепло бумажные этикетки размокают. Мы подберем полимерные материалы, решающие эту проблему.</li>
+                        <li><strong>Читаемость микрошрифта:</strong> Пищевые ГОСТы требуют указания полного состава, БЖУ и КБЖУ. Мы гарантируем высокую резкость мелких шрифтов.</li>
+                        <li><strong>Термочеки и Весы:</strong> Производим термоэтикетки (ТОП и ЭКО) для весовых линий, колбас, сыров и мясной нарезки.</li>
+                        <li><strong>Интеграция "Честный ЗНАК":</strong> Полностью отработан процесс маркировки для молочной продукции, бутилированной воды и консервов.</li>
+                    </ul>
+                </div>
+                <div class="split-image">
+                    <!-- Фотография с автоматическим переключением на заглушку при отсутствии файла -->
+                    <img src="img/food-labels-prod.webp" alt="Пищевые этикетки на производстве" loading="lazy" style="width: 100%; border-radius: 20px; box-shadow: 0 15px 30px rgba(0,0,0,0.08);" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <!-- Заглушка -->
+                    <div style="display:none; width: 100%; min-height: 400px; background: rgba(255,255,255,0.4); backdrop-filter: blur(10px); border-radius: 20px; align-items: center; justify-content: center; flex-direction: column; color: var(--press-green); font-weight: 700; font-size: 20px; border: 2px dashed rgba(45,138,78,0.3); text-align: center; padding: 20px;">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 15px;"><path d="M8 22h8"/><path d="M12 15v7"/><path d="M12 15a5 5 0 0 0 5-5c0-2-.5-4-2-4h-6c-1.5 0-2 2-2 4a5 5 0 0 0 5 5Z"/><path d="M10 4V2"/><path d="M14 4V2"/></svg>
+                        Место для фотографии
+                        <span style="font-size: 14px; font-weight: 500; opacity: 0.7; margin-top: 5px;">(файл: img/food-labels-prod.webp)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ЦИФРОВОЙ ЛИД-МАГНИТ -->
+        <section class="section" style="padding-top: 20px;">
+            <div class="marking-block" data-aos="fade-up">
+                <div class="marking-text">
+                    <div class="label-badge">Чек-лист (PDF)</div>
+                    <h2>7 критических ошибок при заказе этикеток для пищевой продукции</h2>
+                    <p>Скачайте бесплатный PDF-файл, который убережет вас от слива бюджета. Узнайте, как избежать отклеивания в морозилке, проблем с жирными следами и штрафов Роспотребнадзора за нечитаемый состав.</p>
+                    
+                    <form id="leadForm" class="lead-form">
+                        <input type="email" class="lead-input" placeholder="Ваш E-mail для отправки PDF" required>
+                        <button type="submit" class="lead-btn">Скачать чек-лист</button>
+                    </form>
+                    <div id="leadSuccess" class="lead-success">✓ Чек-лист успешно отправлен на вашу почту!</div>
+                </div>
+                <div class="marking-image" style="flex: 0 0 150px;">
+                    <div style="display:flex; align-items: center; justify-content: center; width: 100%; min-height: 150px; color: var(--press-green); opacity: 0.9;">
+                        <svg width="90" height="90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="section">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Частые вопросы</h2>
+                <p>Отвечают технологи Типографии РОСТ</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="0">
+                    <div class="faq-question">Отклеится ли этикетка в морозильной камере? <div class="faq-icon"></div></div>
+                    <div class="faq-answer">Нет. Для замороженных полуфабрикатов, пельменей и мороженого мы используем специальные морозостойкие клеи (Hot-melt), которые сохраняют отличную адгезию при температуре до -40°C.</div>
+                </div>
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="faq-question">Безопасна ли ваша печать для продуктов питания? <div class="faq-icon"></div></div>
+                    <div class="faq-answer">Абсолютно. На производстве применяются специальные УФ-краски низкой миграции (Low Migration), которые официально допущены к печати упаковки с непрямым контактом с пищей.</div>
+                </div>
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="faq-question">Выцветает ли этикетка на солнце или при нагреве в СВЧ? <div class="faq-icon"></div></div>
+                    <div class="faq-answer">При правильном подборе материалов (например, полипропилен с термостойким лаком) этикетка выдержит как охлаждение, так и нагрев в микроволновой печи без потери цвета и деформации.</div>
+                </div>
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="faq-question">Печатаете ли вы коды маркировки "Честный ЗНАК" для пищевки? <div class="faq-icon"></div></div>
+                    <div class="faq-answer">Да, мы <a href="chestny-znak.html" style="color: var(--press-green); text-decoration: underline;">официально интегрируем коды Data Matrix</a> для молочной индустрии, бутилированной воды и консервов с гарантией 100% считываемости на кассе.</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ВЫЗОВ ПОДВАЛА И СТАНДАРТНОГО ОКНА ЗАКАЗА ИЗ КОМПОНЕНТА -->
+    <site-footer></site-footer>
+
+    <!-- Скрипты -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/main.js" defer></script> 
+</body>
+</html>
